@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('todo_tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('confirmation_token')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedBigInteger('todo_id');
+            $table->foreign('todo_id')
+                ->references('id')
+                ->on('todos')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
+            $table->string('label');
+            $table->boolean('is_complete')->default(false);
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('todo_tasks');
     }
 };

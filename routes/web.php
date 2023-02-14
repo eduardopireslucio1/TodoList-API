@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Resources\SalesResource;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
