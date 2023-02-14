@@ -10,20 +10,22 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 
-class WelcomeMail extends Mailable
+class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
+    public $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, string $token)
     {
         $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -34,7 +36,7 @@ class WelcomeMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Bem-vindo ao ' . config('app.name'),
+            subject: 'Alteração de senha',
         );
     }
 
@@ -46,9 +48,9 @@ class WelcomeMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.welcome',
+            view: 'emails.forgot_password',
             with: [
-                'verifyEmailLink' => config('app.url'). '/verificar-email?token='. $this->user->confirmation_token,
+                'resetPasswordLink' => config('app.url'). '/recuperar-senha?token='. $this->token,
             ]
         );
     }
@@ -60,7 +62,6 @@ class WelcomeMail extends Mailable
      */
     public function attachments()
     {
-        return [
-        ];
+        return [];
     }
 }
