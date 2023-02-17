@@ -90,7 +90,7 @@ class AuthService
 
     public function resetPassword(string $email, string $password, string $token)
     {
-        $passReset = PasswordReset::where('email', $email)->where('token', $token)->first();
+        $passReset = PasswordReset::where('email', $email)->where('token', $token)->firstOrFail();
 
         if (empty($passReset)) {
             throw new ResetPasswordTokenInvalidException();

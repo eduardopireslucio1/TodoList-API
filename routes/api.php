@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MeController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +22,14 @@ Route::prefix('v1')->group(function() {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('verify-email', [AuthController::class, 'verifyEmail']);
     Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
-    Route::post('reset-password', [AuthController::class, 'resetPassword']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']); 
+
+    Route::prefix('me')->group(function() { 
+        Route::get('', [MeController::class, 'index']);
+    });
+    Route::prefix('todos')->group(function() { 
+        Route::get('', [TodoController::class, 'index']);
+    });
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
