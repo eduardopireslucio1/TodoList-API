@@ -15,6 +15,6 @@ class Todo extends Model
 
     public function tasks()
     {
-        return $this->hasMany(TodoTask::class);
+        return $this->hasMany(TodoTask::class)->latest();
     }
 }

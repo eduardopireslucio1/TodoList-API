@@ -11,7 +11,7 @@ class TodoTask extends Model
 
     protected $fillable = [
         'label', 
-        'is_completed',
+        'is_complete',
     ];
 
     public function todo()
