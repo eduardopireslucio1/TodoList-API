@@ -26,7 +26,7 @@ class TodoTaskController extends Controller
 
     public function destroy(TodoTask $todoTask)
     {
-        $this->authorize('delete', $todoTask);
+        $this->authorize('destroy', $todoTask);
         $todoTask->delete();
     }
 }
