@@ -28,6 +28,7 @@ Route::prefix('v1')->group(function() {
     Route::prefix('me')->group(function() { 
         Route::get('', [MeController::class, 'index']);
     });
+    
     Route::prefix('todos')->group(function() { 
         Route::get('', [TodoController::class, 'index']);
         Route::get('{todo}', [TodoController::class, 'show']);
